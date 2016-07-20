@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>项目申报子系统</title>
+		<link rel="stylesheet" type="text/css" href="Demo.css"/>
+	</head>
+	<body>
+		<div class="main">
+			<header>
+				<div class="logo">
+					<h1>项目申报子系统</h1>
+				</div>
+				<ul class="header-user">
+					<li><a href="#"><i><img src="img/user.png" /></i>管理员</a></li>
+					<li><a href="#"><i><img src="img/exit.png" /></i>退出</a></li>
+				</ul>
+				<ul class="header-nav">
+					<li><a href="#">项目申报管理</a></li>
+					<li><a href="#" class="aBottom">计划申报管理</a></li>
+					<li><a href="#">年度建设计划管理</a></li>
+					<li><a href="#">统计</a></li>
+					<li><a href="#">互动咨询</a></li>
+				</ul>
+			</header>
+			<div class="content">
+				<div class="content-left">
+					<div class="content-left-will unpendant">
+						拟上报计划
+					</div>
+					<div class="content-left-ago pendant">
+						历史计划
+					</div>
+
+					<div class="content-left-project">
+						<h2>项目名称</h2>
+						<ul class="content-left-project-items">
+							<li>
+								<a href="#">
+									<div class="content-left-project-item content-left-project-item-select">
+										<h3>常山县城乡生活垃圾填埋场一期工程渗滤液处理系统提标改造工程</h3>
+										<i><img src="img/over.png" /></i><span>已审核 上年建成115 （万立平方米）</span>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<div class="content-left-project-item">
+										<h3>缙云县生活垃圾填埋场渗沥液处理升级改造工程</h3>
+										<i><img src="img/back.gif" /></i><span>已退回 上年建成269 （万立平方米）</span>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<div class="content-left-project-item">
+										<h3>缙云县生活垃圾填埋场渗沥液处理升级改造工程</h3>
+										<i><img src="img/up.png" /></i><span>已上报 上年建成269 （万立平方米）</span>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<div class="content-left-project-item">
+										<h3>缙云县生活垃圾填埋场渗沥液处理升级改造工程</h3>
+										<i><img src="img/back.gif" /></i><span>已退回 上年建成269 （万立平方米）</span>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<div class="content-left-project-item">
+										<h3>缙云县生活垃圾填埋场渗沥液处理升级改造工程</h3>
+										<i><img src="img/up.png" /></i><span>已上报 上年建成269 （万立平方米）</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+						
+						<ul class="content-left-project-pages">
+							<li><a href="#">←</a></li>
+							<li><a href="#" class="content-left-project-pages-select">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">...</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">→</a></li>
+						</ul>
+						
+						
+					</div>
+				</div>
+				<div class="content-right">
+					<table class="content-right-search">
+						<tr>
+							<td>行政区域：</td>
+							<td><input type="text" /></td>
+							<td>关键词：</td>
+							<td><input type="text" /></td>
+						</tr>
+						<tr>
+							<td>年度：</td>
+							<td>
+								<select name="year" id="year"></select>
+							</td>
+							<td>类别：</td>
+							<td>
+								<select name="category">
+								<option value=""></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<button><i><img src="img/seach.png"/></i>查询计划</button>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="content-right-plan">
+						<div class="content-right-plan-title pendant">
+							项目计划表
+						</div>
+						<h3>常山县城乡生活垃圾填埋场一期工程渗滤液处理系统提标改造工程</h3>
+						<table class="content-right-plan-table" cellspacing="0">
+							<tr>
+								<td>市县名称</td>
+								<th>缙云县</th>
+								<td>城镇名称</td>
+								<th>缙云县</th>
+							</tr>
+							<tr>
+								<td>项目分类</td>
+								<th>垃圾处理</th>
+								<td>项目规模<br /><span>（写明计量单位）</span></td>
+								<th>日处理渗沥液150吨/天</th>
+							</tr>
+							<tr>
+								<td>项目总投资<br /><span>（万元）</span></td>
+								<th>590</th>
+								<td>建设起止年月</td>
+								<th>2015.12-2016.7</th>
+							</tr>
+							<tr>
+								<td>施工合同签订年月</td>
+								<th>2010.6</th>
+								<td>项目开工年月</td>
+								<th>2010.6</th>
+							</tr>
+							<tr>
+								<td>批复文号</td>
+								<th colspan="3">缙发改投资2015[280]吨</th>
+							</tr>
+							<tr>
+								<td>省建设厅下达年度建设计划文号</td>
+								<th colspan="3"></th>
+							</tr>
+							<tr>
+								<td colspan="2">上年计划建成一级A改造规模<span>（万立方米/日）</span></td>
+								<th colspan="2">1258</th>
+							</tr>
+							<tr>
+								<td rowspan="2">已建成<br /><span>（截止到上年底）</span></td>
+								<td>一级A改造规模<span>（万立方米/日）</span></td>
+								<th colspan="2">128</th>
+							</tr>
+							<tr>
+								<td>上年建成<span>（万立方米/日）</span></td>
+								<th colspan="2">128</th>
+							</tr>
+							<tr>
+								<td rowspan="2">上年投资情况</td>
+								<td>项目总投资<span>（万元）</span></td>
+								<th colspan="2">290</th>
+							</tr>
+							<tr>
+								<td>上年完成投资<span>（万元）</span></td>
+								<th colspan="2">506</th>
+							</tr>
+							<tr>
+								<td rowspan="2">上年资金下达情况</td>
+								<td>中央资金<span>（万元）</span></td>
+								<th colspan="2">3306</th>
+							</tr>
+							<tr>
+								<td>省级资金<span>（万元）</span></td>
+								<th colspan="2">339</th>
+							</tr>
+
+						</table>
+						<h3>项目附件</h3>
+						<table class="content-right-plan-more" cellspacing="0">
+							<tr>
+								<td>批复文件</td>
+								<td><span>缙发改投资2015[280]吨</span></td>
+								<td><a href="#"><i><img src="img/look.png"/></i>预览</a></td>
+								<td><a href="#"><i><img src="img/download.png"/></i>下载</a></td>
+							</tr>
+							<tr>
+								<td>施工合同</td>
+								<td><span>缙发改投资2015[280]吨</span></td>
+								<td><a href="#"><i><img src="img/look.png"/></i>预览</a></td>
+								<td><a href="#"><i><img src="img/download.png"/></i>下载</a></td>
+							</tr>
+							<tr>
+								<td>工程许可</td>
+								<td><span>缙发改投资2015[280]吨</span></td>
+								<td><a href="#"><i><img src="img/look.png"/></i>预览</a></td>
+								<td><a href="#"><i><img src="img/download.png"/></i>下载</a></td>
+							</tr>
+							<tr>
+								<td>计划文件</td>
+								<td><span>缙发改投资2015[280]吨</span></td>
+								<td><a href="#"><i><img src="img/look.png"/></i>预览</a></td>
+								<td><a href="#"><i><img src="img/download.png"/></i>下载</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="Demo.js" type="text/javascript" charset="utf-8"></script>
+</html>
