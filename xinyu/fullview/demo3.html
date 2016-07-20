@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			body{
+				
+			}
+			.frontDiv,
+			.backDiv,
+			.topDiv,
+			.leftDiv,
+			.rightDiv,
+			.bottomDiv{
+				/*height: 1200px;
+				width: 1200px;*/
+				position: absolute;
+				
+			}
+
+			/*.backDiv{
+				 transform:rotateY(180deg) translateZ(600px);
+				 
+			}
+			.frontDiv{
+				 transform: translateZ(600px);
+				 
+			}
+			.leftDiv{
+				transform:rotateY(90deg) translateZ(600px);
+				
+			}
+			.rightDiv{
+				transform: rotateY(-90deg) translateZ(600px);
+				
+			}
+			.topDiv{
+				transform: rotateX(90deg) translateZ(600px);
+				
+			}
+			.bottomDiv{
+				transform: rotateX(-90deg) translateZ(600px) rotateY(180deg);
+				
+			}*/
+			#blockDiv{
+				
+				/*height: 1200px;
+				width: 1200px;*/
+				margin: auto;
+				
+				transform-style: preserve-3d;
+				transition: .2s;
+
+			}
+			#main{
+				height: 600px;
+				width: 700px;
+				margin: auto;
+				overflow: hidden;
+				transform-style: preserve-3d;
+				position: relative;
+				-webkit-perspective: 500;
+			}
+			div>img{
+				width: 100%;
+				height: 100%;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="main">
+			
+			<div id="blockDiv" draggable="false">
+				<div class="backDiv" draggable="false">
+					<img src="img/kfq_o_800_3.jpg" draggable="false"/>
+				</div>
+				<div class="frontDiv" draggable="false">
+					<img src="img/kfq_o_800_1.jpg" draggable="false"/>
+				</div>
+				<div class="leftDiv" draggable="false">
+					<img src="img/kfq_o_800_0.jpg" draggable="false"/>
+				</div>
+				<div class="rightDiv" draggable="false">
+					<img src="img/kfq_o_800_2.jpg" draggable="false"/>
+				</div>
+				<div class="topDiv" draggable="false">
+					<img src="img/kfq_o_800_4.jpg" draggable="false"/>
+				</div>
+				<div class="bottomDiv" draggable="false">
+					<img src="img/kfq_o_800_5.jpg" draggable="false"/>
+				</div>
+			</div>
+			<button id="left">左</button>
+			<button id="right">右</button>
+			<button id="top">上</button>
+			<button id="down">下</button>
+			<span id="x">X:</span>
+			<span id="y">Y:</span>
+			<span id="z">Z:</span>
+		</div>
+	</body>
+	<script src="../jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+//		
+		var started =false;
+		var x=0,y=0,z=0,moveX=0,moveY=0,moveZ=0;
+		var sumX=0,sumY=0;
+		var oDiv = document.getElementById("blockDiv");
+		oDiv.addEventListener("mousedown", doMouseDown, false);
+		oDiv.addEventListener("mousemove", doMouseMove, false);
+		oDiv.addEventListener("mouseup", doMouseUp, false);
+		function doMouseDown (event) {
+			x=event.pageX;
+			y=event.pageY;
+			$("#x").html("X:"+x);
+			$("#y").html("Y:"+y);
+			started = true;
+		}
+		function doMouseMove () {
+			if (started) {
+				moveX = event.pageX;
+				moveY = event.pageY;
+				
+				$("#blockDiv").css("transform", "rotateX("+(sumY+((moveY-y)/4))+"deg)" + "rotateY("+(-(sumX+((moveX-x)/4)))+"deg)");
+//				$("#blockDiv").css("transform","rotateY("+(sumX+((moveX-x)/4))+"deg)");
+				
+			}
+		}
+		function doMouseUp () {
+			
+			sumX +=((moveX-x)/4);
+			sumY +=((moveY-y)/4);
+			started=false;
+		}
+		
+		$("#left").click(function () {
+			y+=30;
+			z+=30;
+			$("#blockDiv").css("transform","rotateY("+y+"deg)");
+			
+		})
+		$("#right").click(function () {
+			y-=30;
+			z-=30;
+			$("#blockDiv").css("transform","rotateY("+y+"deg)");
+		})
+		$("#top").click(function () {
+			x+=30;
+			z+=30;
+			$("#blockDiv").css("transform","rotateX("+x+"deg)");
+		})
+		$("#down").click(function () {
+			x-=30;
+			z-=30;
+			$("#blockDiv").css("transform","rotateX("+x+"deg)");
+		})
+		
+		function init (w) {
+			
+			$("#blockDiv").css("width",w+"px");
+			$("#blockDiv").css("height",w+"px");
+			$("#blockDiv").css("margin-left","-"+(w*0.325)+"px");
+			$("#blockDiv").css("margin-top","-"+(w*0.325)+"px");
+			
+			$(".backDiv").css("height",w+"px");
+			$(".backDiv").css("width",w+"px");
+			$(".frontDiv").css("height",w+"px");
+			$(".frontDiv").css("width",w+"px");
+			$(".leftDiv").css("height",w+"px");
+			$(".leftDiv").css("width",w+"px");
+			$(".rightDiv").css("height",w+"px");
+			$(".rightDiv").css("width",w+"px");
+			$(".topDiv").css("height",w+"px");
+			$(".topDiv").css("width",w+"px");
+			$(".bottomDiv").css("height",w+"px");
+			$(".bottomDiv").css("width",w+"px");
+
+			$(".backDiv").css("transform","rotateY(180deg) translateZ("+(w/2)+"px) rotateY(180deg)");
+			$(".frontDiv").css("transform","translateZ("+(w/2)+"px) rotateY(180deg)");
+			$(".leftDiv").css("transform","rotateY(90deg) translateZ("+(w/2)+"px) rotateY(180deg)");
+			$(".rightDiv").css("transform","rotateY(-90deg) translateZ("+(w/2)+"px) rotateY(180deg)");
+			$(".topDiv").css("transform","rotateX(90deg) translateZ("+(w/2)+"px)");
+			$(".bottomDiv").css("transform","rotateX(-90deg) translateZ("+(w/2)+"px) rotateY(180deg) rotateZ(-90deg)");
+		}
+		$(document).ready(function () {
+			init(1200);
+		})
+		
+	</script>
+
+</html>
