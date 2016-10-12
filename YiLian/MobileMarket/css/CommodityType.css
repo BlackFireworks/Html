@@ -1,0 +1,118 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+	font-size: 3vmin;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.main{
+	width: 100%;
+}
+header{
+	margin: 3vmin;
+	height: 10vmin;
+	position: relative;
+	
+}
+header span{
+	display: block;
+	width: 10vmin;
+	position: absolute;
+	height: 100%;
+	top: 0;
+}
+
+header span>a{
+	display: block;
+	height: 100%;
+}
+header span:nth-child(1){
+	left: 0;
+}
+header span:nth-child(3){
+	right: 0;
+}
+header span img{
+	width: 10vmin;
+	height: 10vmin;
+}
+.header-search{
+	height: 8vmin;
+	margin: 0 8vmin 0 12vmin;
+	
+}
+#searchInput{
+	margin-top: 1vmin;
+	float: left;
+	font-size: 4vmin;
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 1vmin;
+	padding: 0 0 0 10vmin;
+	background-color: #eee;
+	background-image: url(../img/serach.png);
+	background-repeat: no-repeat;
+	background-size: 6vmin;
+	background-position: 1vmin 1vmin;
+}
+.main-content{
+	width: 100%;
+}
+.main-content>div{
+	float: left;
+}
+.main-content-left-selected{
+	background-color: ;
+}
+
+.main-content-left{
+	width: 25%;
+}
+.main-content-left ul{
+	width: 100%;
+}
+.main-content-left li{
+	width: 100%;
+	height: 15vmin;
+	border-top: 1vmin solid #eee;
+	line-height: 15vmin;
+	text-align: center;
+	font-size: 4vmin;
+}
+
+.main-content-right{
+	width: 75%;
+	height: 100%;
+}
+.main-content-right table{
+	width: 100%;
+	border-top: 2vmin solid #eee;
+	border-left: 2vmin solid #eee;
+	height: 100%;
+}
+.main-content-right tr{
+
+	width: 100%;
+	height: 30vmin;
+}
+.main-content-right td{
+	border-right: 2vmin solid #eee;
+	border-bottom: 2vmin solid #eee;
+	text-align: center;
+	width: 33%;
+}
+.main-content-right td>img{
+	margin: 0 auto;
+	width: 80%;
+	
+}
+.main-content-right td>p{
+	width: 100%;
+	float: left;
+	
+}
