@@ -1,0 +1,51 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.changePic{
+	width: 100%;
+	height: 50vmin;
+	overflow: hidden;
+}
+.changePic ul{
+	height: 100%;
+	width: 300%;
+	will-change: auto;
+	display: inline-block;
+}
+.changePic li{
+	float: left;
+	height: 100%;
+}
+.changePic li>img{
+	width: 100%;
+	height: 100%;
+}
+.changePic-nav{
+	margin: -8vmin 10vmin 0 10vmin;
+	height: 20px;
+	position: relative;
+	
+}
+.changePic-nav ul{
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	margin: 0 auto;
+	opacity: .7;
+}
+.changePic-nav ul>li{
+	width: 3vmin !important;
+	height: 3vmin !important;
+	border-radius: 50%;
+	float: none !important;
+	display: inline-block;
+	margin-right: 4vmin;
+	border: 1px solid #666;
+}
+.changePic-nav-unselected{
+	background-color: #eee;
+}
+.changePic-nav-selected{
+	background-color: #000;
+}
