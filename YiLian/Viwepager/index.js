@@ -1,152 +1,164 @@
-var imgUlWidth = 0,
-    imgUl,
-    timer;
+var ChangeImg_imgUlWidth = 0,
+	ChangeImg_imgUl,
+	ChangeImg_timer;
 var ChangeImg = {
-	endX : 0,
-	moveX : 0,
-	speed : 0,
-	startX : 0,
-	moveDis : 0,
-	oDiv : null,
-	navLi : null,
-	timestamp : 0,
-	imgNumber : 0,
-	moving : false,
-	currentImg :  1,
-	moving :  false,
-	imgUlStartX : 0,
-	slideSpeed : 600,
-	slideTime : 3000,
-	init : function (oDiv,slideSpeed,slideTime) {
+	endX: 0,
+	moveX: 0,
+	speed: 0,
+	startX: 0,
+	moveDis: 0,
+	oDiv: null,
+	navLi: null,
+	timestamp: 0,
+	imgNumber: 0,
+	moving: false,
+	currentImg: 1,
+	moving: false,
+	imgUlStartX: 0,
+	slideSpeed: 600,
+	slideTime: 3000,
+	init: function(oDiv, slideSpeed, slideTime) {
 		this.slideSpeed = slideSpeed || 600;
 		this.slideTime = slideTime || 3000;
 		this.getAllElement(oDiv);
-		this.appendUl();
-		this.changeWidth();
-		
 		this.changeColor(this.currentImg);
-		timer = setInterval(function() {
-			ChangeImg.moveLeft(imgUl, imgUlWidth);
+		ChangeImg_timer = setInterval(function() {
+			ChangeImg.moveLeft(ChangeImg_imgUl, ChangeImg_imgUlWidth);
 		}, slideTime);
 	},
-	getAllElement : function (o) {
-		imgUlWidth = document.body.clientWidth;
+	getAllElement: function(o) {
 		this.oDiv = document.getElementById(o) || document.getElementsByClassName(o)[0];
-		imgUl = this.oDiv.childNodes[1];
-		this.imgNumber = imgUl.getElementsByTagName('li').length || 0;
-		imgUl.addEventListener('touchstart',function (e) {
+		ChangeImg_imgUl = this.oDiv.childNodes[1];
+		this.imgNumber = ChangeImg_imgUl.getElementsByTagName('li').length || 0;
+		ChangeImg_imgUl.addEventListener('touchstart', function(e) {
 			ChangeImg.touchStart(e);
 		});
-		imgUl.addEventListener('touchmove',function (e) {
+		ChangeImg_imgUl.addEventListener('touchmove', function(e) {
 			ChangeImg.touchMove(e);
 		});
-		imgUl.addEventListener('touchend',function (e) {
+		ChangeImg_imgUl.addEventListener('touchend', function(e) {
 			ChangeImg.touchEnd(e);
 		});
-		this.changeWidth();
+		ChangeImg_imgUl.addEventListener('transitionend', function() {
+			ChangeImg.transitionEnd();
+		}, false);
+		ChangeImg_imgUl.addEventListener('webkitTransitionEnd', function() {
+			ChangeImg.transitionEnd();
+		}, false);
+		ChangeImg_imgUl.addEventListener('mozTransitionEnd', function() {
+			ChangeImg.transitionEnd();
+		}, false);
 		
+		this.changeWidth();
+		this.moveTo(this.currentImg);
 		this.navLi = this.oDiv.childNodes[3].childNodes[1].getElementsByTagName('li');
+
 	},
-	moveLeft : function (o,dis) {
-		if (o.style.transition == "none") {
+	moveLeft: function(o, dis) {
+		if(o.style.transition == "none") {
 			o.style.transition = "all " + this.slideSpeed + "ms";
 		}
 		dis = parseInt(dis) * -1;
-		this.move(o,dis);
+		this.move(o, dis);
+		this.currentImg++;
 	},
-	moveRight : function (o,dis) {
-		if (o.style.transition == "none") {
+	moveRight: function(o, dis) {
+		if(o.style.transition == "none") {
 			o.style.transition = "all " + this.slideSpeed + "ms";
 		}
 		dis = parseInt(dis) * 1;
-		this.move(o,dis);
+		this.move(o, dis);
+		this.currentImg--;
 	},
-	move : function (o,dis,setDis) {
-		var oLeft = this.getTransformValue(o.style.transform);
-		moveDis = setDis || (dis + oLeft);
-		this.currentImg = moveDis / imgUlWidth - 1;
-		if (this.moving === false) {
-			this.changeColor(this.currentImg);
+	move: function(o, dis, setDis) {
+
+		moveDis = setDis || (dis + this.getTransformValue(o.style.transform));
+		if (Math.abs(setDis) === 0) {
+			moveDis = setDis;
 		}
-		o.style.transform = "translateX("+ moveDis +"px)";
-		if (this.currentImg === this.imgNumber * -1) {
-			setTimeout(function () {
-				ChangeImg.moveTo(ChangeImg.imgNumber * 2);
-			},this.slideSpeed);
-		}
-		if (this.currentImg === this.imgNumber * -2 - 1) {
-			setTimeout(function () {
-				ChangeImg.moveTo(ChangeImg.imgNumber + 1);
-			},this.slideSpeed);
-		}
+		o.style.transform = "translateX(" + moveDis + "px)";
+
+	},
+	moveTo: function(site) {
+		ChangeImg_imgUl.style.transition = "none";
+		ChangeImg.move(ChangeImg_imgUl, null, ChangeImg_imgUlWidth * site  * -1);
 		
 	},
-	moveTo : function (site) {
-		imgUl.style.transition = "none";
-		ChangeImg.move(imgUl,null, imgUlWidth * (site-1) * -1);
-		ChangeImg.changeColor(ChangeImg.currentImg);
-	},
-	getTransformValue : function (transformValue) {
+	getTransformValue: function(transformValue) {
 		var result_start = transformValue.indexOf('(');
 		var result_stop = transformValue.indexOf('px');
-		return parseInt(transformValue.substring(result_start + 1,result_stop)) || 0;
+		return parseInt(transformValue.substring(result_start + 1, result_stop)) || 0;
 	},
-	changeWidth : function () {
-		
-		var oLi = imgUl.getElementsByTagName('li');
-		imgUl.style.width = oLi.length * imgUlWidth + "px";
-		for (var i = 0; i < oLi.length; i++) {
-			if (oLi[i].nodeName != "#text") {
-				oLi[i].style.width = imgUlWidth + "px";
+	changeWidth: function() {
+		ChangeImg_imgUlWidth = document.body.clientWidth;
+		var oLi = ChangeImg_imgUl.getElementsByTagName('li');
+		console.log(oLi);
+		ChangeImg_imgUl.style.width = oLi.length * ChangeImg_imgUlWidth + "px";
+		for(var i = 0; i < oLi.length; i++) {
+			if(oLi[i].nodeName != "#text") {
+				oLi[i].style.width = ChangeImg_imgUlWidth + "px";
 			}
 		}
 		
 	},
-	appendUl : function () {
-		imgUl.innerHTML = imgUl.innerHTML+imgUl.innerHTML+imgUl.innerHTML;
-		imgUl.style.transition = "none";
-		ChangeImg.move(imgUl,null,imgUlWidth * -this.imgNumber);
-	},
-	changeColor : function (item) {
-		item = Math.abs(parseInt(item)) - this.imgNumber;
-		item = item % this.imgNumber;
-		if (item === 0) {
-			item = this.imgNumber;
-		}
-		for (var i = 0; i < this.navLi.length; i++) {
+	changeColor: function(item) {
+		for(var i = 0; i < this.navLi.length; i++) {
 			this.navLi[i].className = "changePic-nav-unselected";
 		}
 		this.navLi[item - 1].className = "changePic-nav-selected";
 	},
-	touchStart : function (e) {
+	touchStart: function(e) {
 		this.moving = true;
-		imgUl.style.transition = "none"
-		clearInterval(timer);
+
+		clearInterval(ChangeImg_timer);
 		this.startX = e.touches[0].pageX;
-		this.imgUlStartX = this.getTransformValue(imgUl.style.transform);
+		this.imgUlStartX = this.getTransformValue(ChangeImg_imgUl.style.transform);
 		this.timestamp = new Date().getTime();
+
 	},
-	touchMove : function (e) {
+	touchMove: function(e) {
+
+		ChangeImg_imgUl.style.transition = "none"
+		e.preventDefault();
 		this.moveX = e.touches[0].pageX - this.startX;
-		this.move(imgUl,null,this.moveX + this.imgUlStartX);
+		this.move(ChangeImg_imgUl, null, -this.currentImg * ChangeImg_imgUlWidth + this.moveX);
 		this.endX = e.touches[0].pageX;
 	},
-	touchEnd : function (e) {
-		imgUl.style.transition =  "all " + this.slideSpeed + "ms";
+	touchEnd: function(e) {
+		ChangeImg_imgUl.style.transition = "all " + this.slideSpeed + "ms";
 		this.moving = false;
-		timer = setInterval(function() {
-			ChangeImg.moveLeft(imgUl, imgUlWidth);
+		ChangeImg_timer = setInterval(function() {
+			ChangeImg.moveLeft(ChangeImg_imgUl, ChangeImg_imgUlWidth);
 		}, this.slideTime);
 		this.timestamp = new Date().getTime() - this.timestamp;
 		this.speed = this.moveX / this.timestamp;
-		if (this.speed > 1.1 || this.moveX * 2 > imgUlWidth) {
-
-			this.move(imgUl,null, imgUlWidth + this.imgUlStartX)
-		}else if(this.speed < -1.1 || this.moveX * -2 > imgUlWidth){
-
-			this.move(imgUl,null, - imgUlWidth + this.imgUlStartX)
-		}else{
-			this.move(imgUl,null, this.imgUlStartX)
+		console.log(this.speed);
+		if(this.speed > 0.4 || this.moveX * 2 > ChangeImg_imgUlWidth) {
+			
+			this.currentImg--;
+			console.log( -ChangeImg_imgUlWidth * this.currentImg);
+			this.move(ChangeImg_imgUl, null, -ChangeImg_imgUlWidth * this.currentImg);
+		} else if(this.speed < -0.4 || this.moveX * -2 > ChangeImg_imgUlWidth) {
+			
+			this.currentImg++;
+			this.move(ChangeImg_imgUl, null, -ChangeImg_imgUlWidth * this.currentImg);
+		} else {
+			this.move(ChangeImg_imgUl, null, this.imgUlStartX);
 		}
+	},
+	transitionEnd: function() {
+		
+		if(this.currentImg >= this.imgNumber - 1) {
+			this.currentImg = 1;
+			this.moveTo(1);
+			
+
+		} else if(this.currentImg <= 0) {
+			this.currentImg = this.imgNumber - 2;
+			this.moveTo(this.imgNumber - 2);
+			
+		}
+		
+		ChangeImg.changeColor(ChangeImg.currentImg);
 	}
 }
